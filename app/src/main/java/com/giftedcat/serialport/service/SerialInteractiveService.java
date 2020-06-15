@@ -11,8 +11,8 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.kongqw.serialportlibrary.SerialPortManager;
-import com.kongqw.serialportlibrary.listener.OnSerialPortDataListener;
+import com.giftedcat.serialportlibrary.SerialPortManager;
+import com.giftedcat.serialportlibrary.listener.OnSerialPortDataListener;
 
 import java.io.File;
 
@@ -41,14 +41,14 @@ public class SerialInteractiveService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        mSerialPortManager1 = new SerialPortManager(new File("/dev/ttyS0"), 9600)
+        mSerialPortManager1 = new SerialPortManager(new File("/dev/ttyS3"), 9600)
                 .setOnSerialPortDataListener(new OnSerialPortDataListener() {
                     @Override
                     public void onDataReceived(byte[] bytes) {
                         sendMessageToClient(101, new String(bytes));
                     }
                 });
-        mSerialPortManager2 = new SerialPortManager(new File("/dev/ttyS1"), 9600)
+        mSerialPortManager2 = new SerialPortManager(new File("/dev/ttyS2"), 9600)
                 .setOnSerialPortDataListener(new OnSerialPortDataListener() {
                     @Override
                     public void onDataReceived(byte[] bytes) {

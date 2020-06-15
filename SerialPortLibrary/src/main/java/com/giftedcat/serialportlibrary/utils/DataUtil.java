@@ -1,4 +1,4 @@
-package com.kongqw.serialportlibrary.utils;
+package com.giftedcat.serialportlibrary.utils;
 
 /**
  * @author giftedcat

@@ -1,4 +1,4 @@
-package com.kongqw.serialportlibrary.listener;
+package com.giftedcat.serialportlibrary.listener;
 
 /**
  * Created by Kongqw on 2017/11/14.

@@ -1,4 +1,4 @@
-package com.kongqw.serialportlibrary;
+package com.giftedcat.serialportlibrary;
 
 import java.io.File;
 import java.io.FileDescriptor;

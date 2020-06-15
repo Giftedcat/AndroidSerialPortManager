@@ -1,14 +1,14 @@
-package com.kongqw.serialportlibrary;
+package com.giftedcat.serialportlibrary;
 
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
 
-import com.kongqw.serialportlibrary.listener.OnOpenSerialPortListener;
-import com.kongqw.serialportlibrary.listener.OnSerialPortDataListener;
-import com.kongqw.serialportlibrary.thread.SerialPortReadThread;
-import com.kongqw.serialportlibrary.utils.DataUtil;
+import com.giftedcat.serialportlibrary.listener.OnOpenSerialPortListener;
+import com.giftedcat.serialportlibrary.listener.OnSerialPortDataListener;
+import com.giftedcat.serialportlibrary.thread.SerialPortReadThread;
+import com.giftedcat.serialportlibrary.utils.DataUtil;
 
 import java.io.File;
 import java.io.FileDescriptor;

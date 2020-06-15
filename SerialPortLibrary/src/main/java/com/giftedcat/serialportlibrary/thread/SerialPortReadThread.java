@@ -1,4 +1,4 @@
-package com.kongqw.serialportlibrary.thread;
+package com.giftedcat.serialportlibrary.thread;
 
 import android.util.Log;
 
