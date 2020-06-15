@@ -3,7 +3,7 @@ package com.giftedcat.serialportlibrary.listener;
 import java.io.File;
 
 /**
- * Created by Kongqw on 2017/11/14.
+ * Created by giftedcat on 2020/6/13.
  * 打开串口监听
  */
 

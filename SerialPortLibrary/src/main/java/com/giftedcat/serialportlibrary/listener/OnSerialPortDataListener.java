@@ -1,7 +1,7 @@
 package com.giftedcat.serialportlibrary.listener;
 
 /**
- * Created by Kongqw on 2017/11/14.
+ * Created by giftedcat on 2020/6/13.
  * 串口消息监听
  */
 

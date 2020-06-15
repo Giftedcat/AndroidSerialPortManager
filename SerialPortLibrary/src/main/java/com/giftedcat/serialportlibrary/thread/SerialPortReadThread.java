@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Created by Kongqw on 2017/11/14.
+ * Created by giftedcat on 2020/6/13.
  * 串口消息读取线程
  */
 
