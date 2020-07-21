@@ -8,7 +8,7 @@ Via Maven:
 	<dependency>
 	    <groupId>com.github.Giftedcat</groupId>
 	    <artifactId>AndroidSerialPortManager</artifactId>
-	    <version>V1.0.1</version>
+	    <version>v1.0.2</version>
 	</dependency>
 ```
 # 一、前言
