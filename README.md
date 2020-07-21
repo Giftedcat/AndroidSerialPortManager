@@ -1,7 +1,7 @@
 # 将SerialPortManager添加到你的项目
 Via Gradle:
 ```
-implementation 'com.github.Giftedcat:AndroidSerialPortManager:V1.0.1'
+implementation 'com.github.Giftedcat:AndroidSerialPortManager:v1.0.2'
 ```
 Via Maven:
 ```
