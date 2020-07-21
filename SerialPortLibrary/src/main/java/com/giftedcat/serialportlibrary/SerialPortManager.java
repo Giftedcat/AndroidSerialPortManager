@@ -34,6 +34,13 @@ public class SerialPortManager extends SerialPort {
     private Handler mSendingHandler;
     private SerialPortReadThread mSerialPortReadThread;
 
+    public static final int NORMAL = 0;
+
+    public static final int SPLICING = 1;
+
+    /** 数据读取方式*/
+    private int readType;
+
     /**
      * 打开串口
      *
@@ -42,7 +49,11 @@ public class SerialPortManager extends SerialPort {
      * @return 打开是否成功
      */
     public SerialPortManager(File device, int baudRate) {
+        this(device, baudRate, NORMAL);
+    }
 
+    public SerialPortManager(File device, int baudRate, int readType){
+        this.readType = readType;
         Log.i(TAG, "openSerialPort: " + String.format("打开串口 %s  波特率 %s", device.getPath(), baudRate));
 
         // 校验串口权限
@@ -65,11 +76,11 @@ public class SerialPortManager extends SerialPort {
             if (null != mOnOpenSerialPortListener) {
                 mOnOpenSerialPortListener.onSuccess(device);
             }
+            Log.i(TAG, device.getName() + "串口打开成功");
             // 开启发送消息的线程
             startSendThread();
             // 开启接收消息的线程
             startReadThread();
-            Log.i(TAG, device.getName() + "串口打开成功");
         } catch (Exception e) {
             e.printStackTrace();
             if (null != mOnOpenSerialPortListener) {
@@ -178,7 +189,7 @@ public class SerialPortManager extends SerialPort {
      * 开启接收消息的线程
      */
     private void startReadThread() {
-        mSerialPortReadThread = new SerialPortReadThread(mFileInputStream) {
+        mSerialPortReadThread = new SerialPortReadThread(mFileInputStream, readType) {
             @Override
             public void onDataReceived(byte[] bytes) {
                 if (null != mOnSerialPortDataListener) {
