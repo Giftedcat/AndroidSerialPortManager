@@ -20,7 +20,8 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView tvData1,tvData2;
+    TextView tvData1,tvData2, tvData3;
+    private SerialPortManager serialPortManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         tvData1 = (TextView) findViewById(R.id.tv_data1);
         tvData2 = (TextView) findViewById(R.id.tv_data2);
+        tvData3 = (TextView) findViewById(R.id.tv_data3);
         findViewById(R.id.btn_send1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,6 +47,19 @@ public class MainActivity extends AppCompatActivity {
                 MessengerSendUtil.sendMessageToServer(202, "0x01");
             }
         });
+        serialPortManager = new SerialPortManager(new File("/dev/ttyS4"), 9600, SerialPortManager.SPLICING)
+                .setOnSerialPortDataListener(new OnSerialPortDataListener() {
+                    @Override
+                    public void onDataReceived(final byte[] bytes) {
+                        /** 接收到串口数据*/
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                tvData3.setText(new String(bytes));
+                            }
+                        });
+                    }
+                });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
