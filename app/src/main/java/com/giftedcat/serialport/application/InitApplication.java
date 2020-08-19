@@ -12,7 +12,9 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
+import com.giftedcat.serialport.BuildConfig;
 import com.giftedcat.serialport.event.SerialDataEvent;
+import com.giftedcat.serialportlibrary.SerialPortManager;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -41,6 +43,9 @@ public class InitApplication extends Application {
         super.onCreate();
 
         initSerialReaderServer();
+        if (BuildConfig.DEBUG){
+            SerialPortManager.openLog();
+        }
     }
 
     /**

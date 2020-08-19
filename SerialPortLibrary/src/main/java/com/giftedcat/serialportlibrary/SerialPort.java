@@ -10,8 +10,6 @@ public class SerialPort {
         System.loadLibrary("SerialPort");
     }
 
-    private static final String TAG = SerialPort.class.getSimpleName();
-
     /**
      * 文件设置最高权限 777 可读 可写 可执行
      *

@@ -3,11 +3,13 @@ package com.giftedcat.serialportlibrary;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
-import android.util.Log;
 
 import com.giftedcat.serialportlibrary.listener.OnOpenSerialPortListener;
 import com.giftedcat.serialportlibrary.listener.OnSerialPortDataListener;
+import com.giftedcat.serialportlibrary.logger.DefaultLogger;
+import com.giftedcat.serialportlibrary.logger.ILogger;
 import com.giftedcat.serialportlibrary.thread.SerialPortReadThread;
+import com.giftedcat.serialportlibrary.utils.Consts;
 import com.giftedcat.serialportlibrary.utils.DataUtil;
 
 import java.io.File;
@@ -24,6 +26,9 @@ import java.io.IOException;
 public class SerialPortManager extends SerialPort {
 
     private static final String TAG = SerialPortManager.class.getSimpleName();
+
+    public static ILogger logger = new DefaultLogger(Consts.TAG); // 日志工具
+
     private FileInputStream mFileInputStream;
     private FileOutputStream mFileOutputStream;
     private FileDescriptor mFd;
@@ -54,17 +59,17 @@ public class SerialPortManager extends SerialPort {
 
     public SerialPortManager(File device, int baudRate, int readType){
         this.readType = readType;
-        Log.i(TAG, "openSerialPort: " + String.format("打开串口 %s  波特率 %s", device.getPath(), baudRate));
+        logger.info(TAG, "openSerialPort: " + String.format("打开串口 %s  波特率 %s", device.getPath(), baudRate));
 
         // 校验串口权限
         if (!device.canRead() || !device.canWrite()) {
             boolean chmod777 = chmod777(device);
             if (!chmod777) {
-                Log.i(TAG, "openSerialPort: 没有读写权限");
+                logger.info(TAG,  "openSerialPort: 没有读写权限");
                 if (null != mOnOpenSerialPortListener) {
                     mOnOpenSerialPortListener.onFail(device, OnOpenSerialPortListener.Status.NO_READ_WRITE_PERMISSION);
                 }
-                Log.i(TAG, device.getName() + "串口打开失败");
+                logger.info(TAG,  device.getName() + "串口打开失败");
             }
         }
 
@@ -72,11 +77,11 @@ public class SerialPortManager extends SerialPort {
             mFd = open(device.getAbsolutePath(), baudRate, 0);
             mFileInputStream = new FileInputStream(mFd);
             mFileOutputStream = new FileOutputStream(mFd);
-            Log.i(TAG, "openSerialPort: 串口已经打开 " + mFd);
+            logger.info(TAG,  "openSerialPort: 串口已经打开 " + mFd);
             if (null != mOnOpenSerialPortListener) {
                 mOnOpenSerialPortListener.onSuccess(device);
             }
-            Log.i(TAG, device.getName() + "串口打开成功");
+            logger.info(TAG,  device.getName() + "串口打开成功");
             // 开启发送消息的线程
             startSendThread();
             // 开启接收消息的线程
@@ -87,7 +92,14 @@ public class SerialPortManager extends SerialPort {
                 mOnOpenSerialPortListener.onFail(device, OnOpenSerialPortListener.Status.OPEN_FAIL);
             }
         }
-        Log.i(TAG, device.getName() + "串口打开失败");
+        logger.info(TAG,  device.getName() + "串口打开失败");
+    }
+
+    /**
+     * 打开串口的日志
+     * */
+    public static synchronized void openLog() {
+        logger.showLog(true);
     }
 
     /**

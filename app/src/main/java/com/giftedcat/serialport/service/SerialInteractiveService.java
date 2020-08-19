@@ -41,7 +41,7 @@ public class SerialInteractiveService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        mSerialPortManager1 = new SerialPortManager(new File("/dev/ttyS3"), 9600)
+        mSerialPortManager1 = new SerialPortManager(new File("/dev/ttyS3"), 9600, SerialPortManager.SPLICING)
                 .setOnSerialPortDataListener(new OnSerialPortDataListener() {
                     @Override
                     public void onDataReceived(byte[] bytes) {

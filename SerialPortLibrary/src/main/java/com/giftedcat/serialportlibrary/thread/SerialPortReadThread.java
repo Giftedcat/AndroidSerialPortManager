@@ -61,7 +61,7 @@ public abstract class SerialPortReadThread extends Thread {
                     return;
                 }
 
-                Log.i(TAG, "run: ");
+                SerialPortManager.logger.info(TAG, "run: ");
                 int size = mInputStream.read(mReadBuffer);
 
                 if (-1 == size || 0 >= size) {
@@ -72,7 +72,7 @@ public abstract class SerialPortReadThread extends Thread {
 
                 System.arraycopy(mReadBuffer, 0, readBytes, 0, size);
 
-                Log.i(TAG, "run: readBytes = " + new String(readBytes));
+                SerialPortManager.logger.info(TAG, "run: readBytes = " + new String(readBytes));
                 onDataReceived(readBytes);
 
             } catch (IOException e) {
@@ -91,7 +91,6 @@ public abstract class SerialPortReadThread extends Thread {
                 return;
             }
 
-            Log.i(TAG, "run: ");
             int size = 0;
 
             try {
@@ -109,9 +108,9 @@ public abstract class SerialPortReadThread extends Thread {
 
             if (size > 0) {
                 /** 发现有信息后就追加到临时变量*/
-                Log.i("SerialPortReadThread", size + "");
+                SerialPortManager.logger.info(TAG, size + "");
                 readBytes = DataUtil.arrayAppend(readBytes, mReadBuffer, size);
-                Log.i("SerialPortReadThread", DataUtil.bytesToHexString(readBytes, readBytes.length));
+                SerialPortManager.logger.info(TAG, DataUtil.bytesToHexString(readBytes, readBytes.length));
             } else {
                 /** 没有需要追加的数据了，回调*/
                 if (readBytes != null) {
