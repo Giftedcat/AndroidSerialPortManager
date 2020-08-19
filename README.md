@@ -19,11 +19,11 @@ Via Maven:
 # 1.0.3更新
 增加日志是否打印的控制和去掉没必要的日志
 可以在application中加入
-···
+```
         if (BuildConfig.DEBUG){
             SerialPortManager.openLog();
         }
-···
+```
 来控制日志仅在debug模式下显示
 
 # 一、前言
