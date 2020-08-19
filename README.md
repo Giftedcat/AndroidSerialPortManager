@@ -1,7 +1,11 @@
 # 将SerialPortManager添加到你的项目
 Via Gradle:
 ```
-implementation 'com.github.Giftedcat:AndroidSerialPortManager:v1.0.2'
+maven { url "https://jitpack.io" }
+```
+
+```
+implementation 'com.github.Giftedcat:AndroidSerialPortManager:v1.0.3'
 ```
 Via Maven:
 ```
@@ -11,6 +15,17 @@ Via Maven:
 	    <version>v1.0.2</version>
 	</dependency>
 ```
+
+# 1.0.3更新
+增加日志是否打印的控制和去掉没必要的日志
+可以在application中加入
+···
+        if (BuildConfig.DEBUG){
+            SerialPortManager.openLog();
+        }
+···
+来控制日志仅在debug模式下显示
+
 # 一、前言
 
 前段时间在工作中有一个棘手的问题，接手了一个Android项目，因需要投入使用的设备内存小（RAM1GB）且使用到串口较多，频次较高的原因，在某些页面使用上会出现略微的卡顿，导致用户体验不是特别好，我当时的想法是：如果把1GB换成2GB，那么这把牌将绝杀，可惜设备已经订好了，换不得。
