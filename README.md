@@ -5,14 +5,14 @@ maven { url "https://jitpack.io" }
 ```
 
 ```
-implementation 'com.github.Giftedcat:AndroidSerialPortManager:v1.0.3'
+implementation 'com.github.Giftedcat:AndroidSerialPortManager:1.0.3'
 ```
 Via Maven:
 ```
 	<dependency>
 	    <groupId>com.github.Giftedcat</groupId>
 	    <artifactId>AndroidSerialPortManager</artifactId>
-	    <version>v1.0.2</version>
+	    <version>1.0.3</version>
 	</dependency>
 ```
 
